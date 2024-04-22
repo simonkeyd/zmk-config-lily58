@@ -12,7 +12,6 @@
 / {
     keymap {
         compatible = "zmk,keymap";
-
         default_layer {
 // ------------------------------------------------------------------------------------------------------------
 // |  ESC  |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   -   |
@@ -20,34 +19,32 @@
 // |  SHFT |  A  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   ;   |   '   |
 // |  CTRL |  Z  |  X  |  C   |  V   |  B   |   "\"  |  |  "#"  |  N   |  M    |  ,    |  .   |   /   | ENTER |
 //                     | ALT  | GUI  |MO(1) |  SPACE |  | RALT  |MO(2) | BSPC  |  APP  |
-
-            display-name = "main.h";
             bindings = <
-&mt ESC GRAVE  &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                              &kp N6  &kp N7    &kp N8     &kp N9   &kp N0    &kp MINUS
+&mt GRAVE ESC  &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                              &kp N6  &kp N7    &kp N8     &kp N9   &kp N0    &kp MINUS
 &kp TAB        &kp Q   &kp W   &kp E     &kp R     &kp T                               &kp Y   &kp U     &kp I      &kp O    &kp P     &kp LEFT_BRACKET
 &kp LSHIFT     &kp A   &kp S   &kp D     &kp F     &kp G                               &kp H   &kp J     &kp K      &kp L    &kp SEMI  &kp SQT
 &kp LCTRL      &kp Z   &kp X   &kp C     &kp V     &kp B   &kp BACKSLASH    &kp POUND  &kp N   &kp M     &kp COMMA  &kp DOT  &kp FSLH  &kp ENTER
                                &kp LALT  &kp LGUI  &mo 1   &kp SPACE        &kp RALT   &mo 2   &kp BSPC  &kp C_MENU
             >;
+            display-name = "main.h";
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         mo1 {
 // ------------------------------------------------------------------------------------------------------------
 // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-// |   `   | MUT |VOL_U|  3   |  4   |  5   |                   |  6   | HOME  | PG_D  | PG_U |  END  |       |
-// |   F1  | PRV |VOL_D|  NXT |  F5  |  F6  |                   |      |   <-  |   v   |  ^   |  ->   |       |
-// |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  | PSCRN |  +   |   -   |   =   |  [   |   ]   |   \   |
+// |       | MUT |VOL_U|      |      |      |                   | HOME | PG_D  | PG_U  | END  |       |       |
+// |       | PRV |VOL_D|  NXT |      |      |                   |  <-  |   v   |   ^   |  ->  |       |       |
+// |       |     |     |      |      |      |        |  | PSCRN |  +   |   -   |   =   |  [   |   ]   |   \   |
 //                     |      |      |      |        |  |       |      |       |       |
-
-            display-name = "up.vim";
             bindings = <
 &trans     &trans      &trans        &trans      &trans   &trans                        &trans       &trans     &trans     &trans     &trans     &trans
-&kp GRAVE  &kp C_MUTE  &kp C_VOL_UP  &kp N3      &kp N4   &kp N5                        &kp N6       &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &trans
-&kp F1     &kp C_PREV  &kp C_VOL_DN  &kp C_NEXT  &kp F5   &kp F6                        &trans       &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &trans
-&kp F7     &kp F8      &kp F9        &kp F10     &kp F11  &kp F12  &trans    &kp PSCRN  &kp KP_PLUS  &kp MINUS  &kp EQUAL  &kp LBKT   &kp RBKT   &kp BSLH
+&kp GRAVE  &kp C_MUTE  &kp C_VOL_UP  &trans      &trans   &trans                        &kp HOME     &kp PG_DN  &kp PG_UP  &kp END    &trans     &trans
+&trans     &kp C_PREV  &kp C_VOL_DN  &kp C_NEXT  &trans   &trans                        &kp LEFT     &kp DOWN   &kp UP     &kp RIGHT  &trans     &trans
+&trans     &trans      &trans        &trans      &trans   &trans   &trans    &kp PSCRN  &kp KP_PLUS  &kp MINUS  &kp EQUAL  &kp LBKT   &kp RBKT   &kp BSLH
                                      &trans      &trans   &trans   &trans    &trans     &trans       &kp DEL    &trans
             >;
+            display-name = "up.vim";
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
@@ -58,15 +55,14 @@
 // |   `   |  !  |  @  |  |   |  (   |  )   |                   |  {   |  }    |  *    |  (   |   )   |   ~   |
 // |       |     |     |      |      |      |        |  | TO(3) |      |  _    |  +    |  {   |   }   |  "|"  |
 //                     |      |      |      |        |  |       |      |       |       |
-
-            display-name = "down.sh";
             bindings = <
 &trans     &kp F1    &kp F2  &kp F3        &kp F4        &kp F5                           &kp F6         &kp F7             &kp F8           &kp F9    &kp F10   &kp F11
 &trans     &trans    &trans  &trans        &kp RA(N5)    &kp RA(MINUS)                    &kp BACKSLASH  &kp LS(BACKSLASH)  &trans           &trans    &trans    &kp F12
 &kp GRAVE  &kp EXCL  &kp AT  &kp RA(N6)    &kp N5        &kp MINUS                        &kp RA(N4)     &kp RA(EQUAL)      &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp TILDE
 &trans     &trans    &trans  &trans        &trans        &trans         &trans    &tog 3  &trans         &kp MINUS          &kp KP_PLUS      &kp LBRC  &kp RBRC  &kp PIPE
-                             &trans        &trans        &trans         &trans    &trans  &trans         &kp DEL            &trans
+                             &trans        &trans        &trans         &trans    &trans  &trans         &trans             &trans
             >;
+            display-name = "down.sh";
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
@@ -77,7 +73,6 @@
 // |       |     |     |     |     |     |                   |     |     |     |     |     |     |
 // |       |     |     |     |     |     |        |  |       |     |     |     |     |     |     |
 //                     |     |     |     |        |  |       |     |     |     |
-            display-name = "z.mk";
             bindings = <
 &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                  &trans  &trans  &trans  &trans  &trans  &trans
 &trans      &trans        &trans        &trans        &trans        &trans                        &trans  &trans  &trans  &trans  &trans  &trans
@@ -85,6 +80,7 @@
 &trans      &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
                           &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans
             >;
+            display-name = "z.mk";
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
     };
