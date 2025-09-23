@@ -31,6 +31,23 @@
 
         mo1 {
 // ------------------------------------------------------------------------------------------------------------
+// |       |     |     |      |      |      |                   |      |       |       |      |       |       |
+// |       |  @  |  à  |  é   |  è   |   `  |                   |   ^  |  "    |  '    |  =   |   |   |       |
+// |   `   |  [  |  ]  |  (   |  )   |   -  |                   |   _  |  {    |  }    |  <   |   >   |   ~   |
+// |       |  #  |  =  |  ç   |  +   |   \  |        |  | MO(3) |   &  |  ,    |  ;    |  :   |   !   |       |
+//                     |      |      |      |        |  |       |      |       |       |
+            bindings = <
+&trans     &trans     &trans        &trans        &trans        &trans                           &trans         &trans         &trans        &trans       &trans       &trans
+&trans     &kp RA(N0) &kp N0        &kp N2        &kp N7        &kp RA(N7)                       &kp RA(N9)     &kp N3         &kp N4        &kp EQUAL    &kp RA(N6)   &trans
+&kp GRAVE  &kp RA(N5) &kp RA(MINUS) &kp N5        &kp MINUS     &kp N6                           &kp N8         &kp RA(EQUAL)  &kp RA(N4)    &kp LS(NUBS) &kp NUBS     &kp TILDE
+&trans     &kp RA(N3) &kp EQUAL     &kp N9        &kp LS(EQUAL) &kp RA(N8)     &mo 3     &trans  &kp N1         &trans         &trans        &trans       &trans       &trans
+                                    &trans        &trans        &trans         &trans    &trans  &trans         &trans         &trans
+            >;
+            display-name = "up.h";
+        };
+
+        mo2 {
+// ------------------------------------------------------------------------------------------------------------
 // |       |  F1 |  F2 |  F3  |  F4  |  F5  |                   |  F6  |  F7   |  F8   |  F9  |  F10  |  F11  |
 // |       | MUT |VOL_U|      |      |      |                   | HOME | PG_D  | PG_U  | END  |       |  F12  |
 // |       | PRV |VOL_D|  NXT |      |      |                   |  <-  |   v   |   ^   |  ->  |       |       |
@@ -43,23 +60,6 @@
 &trans     &trans      &trans        &trans      &trans   &trans   &trans    &kp PSCRN  &trans       &trans     &trans     &trans     &trans     &trans
                                      &trans      &trans   &trans   &trans    &trans     &trans       &trans     &trans
             >;
-            display-name = "up.h";
-        };
-
-        mo2 {
-// ------------------------------------------------------------------------------------------------------------
-// |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-// |       |  @  |  à  |  é   |  è   |   `  |                   |   ^  |  "    |  '    |  =   |   |   |       |
-// |   `   |  [  |  ]  |  (   |  )   |   -  |                   |   _  |  {    |  }    |  <   |   >   |   ~   |
-// |       |  #  |  =  |  ç   |  +   |   \  |        |  | MO(4) |   &  |  ,    |  ;    |  :   |   !   |       |
-//                     |      |      |      |        |  |       |      |       |       |
-            bindings = <
-&trans     &trans     &trans        &trans        &trans        &trans                           &trans         &trans             &trans           &trans    &trans       &trans
-&trans     &kp RA(N0) &kp N0        &kp N2        &kp N7        &kp RA(N7)                       &kp RA(N9)     &kp N3             &kp N4           &kp EQUAL &kp RA(N6)   &trans
-&kp GRAVE  &kp RA(N5) &kp RA(MINUS) &kp N5        &kp MINUS     &kp N6                           &kp N8         &kp RA(N4)         &kp RA(EQUAL)    &kp NUBS  &kp LS(NUBS) &kp TILDE
-&trans     &kp RA(N3) &kp EQUAL     &kp N9        &kp LS(EQUAL) &kp RA(N8)     &trans    &mo 3   &kp N1         &trans             &trans           &trans    &trans       &trans
-                                    &trans        &trans        &trans         &trans    &trans  &trans         &trans             &trans
-            >;
             display-name = "down.h";
         };
 
@@ -71,11 +71,11 @@
 // |       |     |     |     |     |     |        |  |       |     |     |     |     |     |     |
 //                     |     |     |     |        |  |       |     |     |     |
             bindings = <
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans      &trans        &trans        &trans        &trans        &trans                        &trans  &trans  &trans  &trans  &trans  &trans
-&trans      &trans        &trans        &trans        &trans        &trans                        &trans  &trans  &trans  &trans  &trans  &trans
-&trans      &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                          &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans
+&bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                 &trans  &trans  &trans  &trans  &trans  &trans
+&trans     &trans       &trans       &trans       &trans       &trans                       &trans  &trans  &trans  &trans  &trans  &trans
+&trans     &trans       &trans       &trans       &trans       &trans                       &trans  &trans  &trans  &trans  &trans  &trans
+&trans     &trans       &trans       &trans       &trans       &trans       &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans       &trans       &trans       &trans       &trans  &trans  &trans  &trans
             >;
             display-name = "z.mk";
         };
