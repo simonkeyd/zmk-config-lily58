@@ -9,7 +9,8 @@ MOUNT_POINT = /mnt/usb
 LEFT_SHIELD = lily58_left
 RIGHT_SHIELD = lily58_right
 BOARD = nice_nano_v2
-EXTRAS = nice_view_adapter nice_view
+EXTRAS ?= nice_view_adapter nice_view
+EXTRA_MODULES_PATH ?=
 
 .PHONY: all left right clean pristine check-west show-firmware deploy-left deploy-right update-zmk
 
@@ -37,12 +38,14 @@ left: check-west $(BUILD_DIR)
 	cd $(ZMK_DIR); west build -s $(ZMK_DIR)/app -d $(BUILD_DIR)/left -b $(BOARD) -- \
 		-DSHIELD="$(LEFT_SHIELD) $(EXTRAS)" \
 		-DZMK_CONFIG=$(CONFIG_DIR)/config \
+		-DZMK_EXTRA_MODULES=$(EXTRA_MODULES_PATH)
 
 right: check-west $(BUILD_DIR)
 	@echo "*** Building right side firmware..."
 	cd $(ZMK_DIR); west build -s $(ZMK_DIR)/app -d $(BUILD_DIR)/right -b $(BOARD) -- \
 		-DSHIELD="$(RIGHT_SHIELD) $(EXTRAS)" \
 		-DZMK_CONFIG=$(CONFIG_DIR)/config \
+		-DZMK_EXTRA_MODULES=$(EXTRA_MODULES_PATH)
 
 clean:
 	rm -rf $(BUILD_DIR)
