@@ -12,13 +12,34 @@ BOARD = nice_nano_v2
 EXTRAS ?= nice_view_adapter nice_view
 EXTRA_MODULES_PATH ?=
 
-.PHONY: all left right clean pristine check-west show-firmware deploy-left deploy-right update-zmk
+DRAWER_DIR ?= $(CONFIG_DIR)/keymap-drawer
+
+# mount_and_copy parametrised var (hack-ish function)
+define mount_and_copy
+@echo "Please put the $(1) side nice!nano into bootloader mode (double-tap reset button)"
+@echo -n "Waiting for USB device..."
+@while ! sudo fdisk -l | grep -q "nRF UF2"; do sleep 1; echo -n .; done
+@echo -e "\nFound nice!nano device"
+@export DEV_PATH=$$(sudo fdisk -l | grep -B1 "nRF UF2" | grep -o '/dev/s[a-z]\+') && \
+	sudo mount $$DEV_PATH $(MOUNT_POINT) && \
+	echo "Copying $(1)/zephyr/zmk.uf2 firmware" && \
+	sudo cp "$(BUILD_DIR)/$(1)/zephyr/zmk.uf2" "$(MOUNT_POINT)/" && \
+	echo "Firmware copied successfully" && \
+	sudo umount $(MOUNT_POINT)
+endef
+
+.PHONY: all left right check-west check-keymap-drawer show-firmware deploy-left deploy-right parse draw clean pristine
 
 all: left right
 
 check-west: $(ZMK_DIR) $(WEST_DIR)
 ifeq (, $(shell command -v west))
 $(error 'west' command not found.)
+endif
+
+check-keymap-drawer:
+ifeq (, $(shell command -v keymap))
+$(error 'keymap' command not found.)
 endif
 
 $(ZMK_DIR):
@@ -34,42 +55,22 @@ $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 left: check-west $(BUILD_DIR)
-	@echo "*** Building left side firmware..."
+	@echo "Building left side firmware..."
 	cd $(ZMK_DIR); west build -s $(ZMK_DIR)/app -d $(BUILD_DIR)/left -b $(BOARD) -- \
 		-DSHIELD="$(LEFT_SHIELD) $(EXTRAS)" \
 		-DZMK_CONFIG=$(CONFIG_DIR)/config \
 		-DZMK_EXTRA_MODULES=$(EXTRA_MODULES_PATH)
 
 right: check-west $(BUILD_DIR)
-	@echo "*** Building right side firmware..."
+	@echo "Building right side firmware..."
 	cd $(ZMK_DIR); west build -s $(ZMK_DIR)/app -d $(BUILD_DIR)/right -b $(BOARD) -- \
 		-DSHIELD="$(RIGHT_SHIELD) $(EXTRAS)" \
 		-DZMK_CONFIG=$(CONFIG_DIR)/config \
 		-DZMK_EXTRA_MODULES=$(EXTRA_MODULES_PATH)
 
-clean:
-	rm -rf $(BUILD_DIR)
-
-pristine: clean
-	rm -rf $(ZMK_DIR)
-
-# Helper target to show firmware locations
 show-firmware:
-	@echo "*** Left firmware: $(BUILD_DIR)/left/zephyr/zmk.uf2"
-	@echo "*** Right firmware: $(BUILD_DIR)/right/zephyr/zmk.uf2"
-
-
-define mount_and_copy
-@echo "*** Please put the $(1) side nice!nano into bootloader mode (double-tap reset button)"
-@echo -n "*** Waiting for USB device..."
-@while ! sudo fdisk -l | grep -q "nRF UF2"; do sleep 1; echo -n .; done
-@echo -e "\n*** Found nice!nano device"
-@export DEV_PATH=$$(sudo fdisk -l | grep -B1 "nRF UF2" | grep -o '/dev/s[a-z]\+') && \
-	sudo mount $$DEV_PATH $(MOUNT_POINT) && \
-	sudo cp "$(BUILD_DIR)/$(1)/zephyr/zmk.uf2" "$(MOUNT_POINT)/" && \
-	echo "*** Firmware copied successfully" && \
-	sudo umount $(MOUNT_POINT)
-endef
+	@echo "Left firmware: $(BUILD_DIR)/left/zephyr/zmk.uf2"
+	@echo "Right firmware: $(BUILD_DIR)/right/zephyr/zmk.uf2"
 
 $(MOUNT_POINT):
 	@sudo mkdir -p /mnt/usb
@@ -79,3 +80,25 @@ deploy-left: $(MOUNT_POINT)
 
 deploy-right: $(MOUNT_POINT)
 	$(call mount_and_copy,right)
+
+parse:
+	@echo "Parsing keymap w/ keymap-drawer..."
+	@keymap -c $(DRAWER_DIR)/config.yaml \
+		parse \
+		-z $(CONFIG_DIR)/config/lily58.keymap \
+		-o $(DRAWER_DIR)/keymap-drawer.yaml
+	@echo "$(DRAWER_DIR)/keymap-drawer.yaml"
+
+draw: check-keymap-drawer parse
+	@echo "Drawing keymap svg w/ keymap-drawer..."
+	@keymap -c $(DRAWER_DIR)/config.yaml \
+		draw \
+		$(DRAWER_DIR)/keymap-drawer.yaml \
+		-o $(DRAWER_DIR)/keymap.svg
+	@echo "$(DRAWER_DIR)/keymap.svg"
+
+clean:
+	rm -rf $(BUILD_DIR)
+
+pristine: clean
+	rm -rf $(ZMK_DIR)

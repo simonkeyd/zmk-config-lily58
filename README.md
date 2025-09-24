@@ -9,6 +9,10 @@ Build and deploy ZMK firmware for Lily58 keyboard with **Azerty layout**, nice!n
 ## Prerequisites
 
 1. [Install and setup ZMK](https://zmk.dev/)
+1. Install keymap-drawer deps
+   ```bash
+   pip install -r keymap-drawer/requirements.txt
+   ```
 
 ## Quick Start
 
@@ -29,3 +33,8 @@ Build and deploy ZMK firmware for Lily58 keyboard with **Azerty layout**, nice!n
    make deploy-right  # For right half
    ```
    Double-tap reset button when prompted to enter bootloader mode.
+
+4. Render keymap layouts SVG:
+   ```bash
+   make draw
+   ```
