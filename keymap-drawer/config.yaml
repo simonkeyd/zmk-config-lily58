@@ -1,0 +1,53 @@
+draw_config:
+  dark_mode: on
+  svg_extra_style: |
+    rect.held, rect.combo.held {
+        fill: #008B8B; /* dark cyan */
+    }
+parse_config:
+  skip_binding_parsing: false
+  raw_binding_map:
+    "&kp RA(N1)": "¹"
+    "&kp RA(N2)": "~"
+    "&kp RA(N3)": "#"
+    "&kp RA(N4)": "{"
+    "&kp RA(N5)": "["
+    "&kp RA(N6)": "|"
+    "&kp RA(N7)": "`"
+    "&kp RA(N8)": "\\"
+    "&kp RA(N9)": "^"
+    "&kp RA(N0)": "@"
+    "&kp RA(MINUS)": "]"
+    "&kp RA(EQUAL)": "}"
+    "&kp N1": "&"
+    "&kp N2": "É"
+    "&kp N3": '"'
+    "&kp N4": "'"
+    "&kp N5": "("
+    "&kp N6": "-"
+    "&kp N7": "È"
+    "&kp N8": "_"
+    "&kp N9": 'Ç'
+    "&kp N0": "À"
+    "&kp MINUS": ")"
+    "&kp EQUAL": "="
+    "&mt MINUS EQUAL": ") ="
+    "&kp EQUAL": "="
+    "&kp MINUS": ")"
+    "&kp Q": "A"
+    "&kp W": "Z"
+    "&kp Z": "W"
+    "&kp A": "Q"
+    "&kp LBKT": "^"
+    "&kp SEMI": "M"
+    "&kp SQT": "ù"
+    "&kp M": ","
+    "&kp COMMA": ";"
+    "&kp DOT": ":"
+    "&kp FSLH": "!"
+    "&kp RBKT": "$"
+    "&kp M": ","
+    "&kp NUHS": "*"
+    "&kp NUBS": "<"
+    "&kp LS(NUBS)": ">"
+    "&kp LS(EQUAL)": "+"

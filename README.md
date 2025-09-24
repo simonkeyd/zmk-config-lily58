@@ -1,10 +1,10 @@
 # Lily58 ZMK Firmware Builder
 
-Build and deploy ZMK firmware for Lily58 keyboard with nice!nano v2 controllers and nice!view displays.
+Build and deploy ZMK firmware for Lily58 keyboard with **Azerty layout**, nice!nano v2 controllers and nice!view displays.
 
 ## Layout
 
-![keymap](keymap.svg)
+![keymap](keymap-drawer/keymap.svg)
 
 ## Prerequisites
 
